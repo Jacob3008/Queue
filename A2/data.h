@@ -1,8 +1,7 @@
 #pragma once
-#include <stdio.h>
 #include <string.h>
 
-class Data {
+class Device {
 public:
 	void setDest(int);
 	int getDest();
@@ -14,23 +13,28 @@ private:
 	char PL[6];
 };
 
-void Data::setDest(int val) {
+// dest setter
+void Device::setDest(int val) {
 	dest = val;
 }
 
-int Data::getDest() {
+// dest getter
+int Device::getDest() {
 	return dest;
 }
 
-void Data::setPL(const char *val) {
+// PL setter
+void Device::setPL(const char *val) {
 	strcpy_s(PL, val);
 }
 
-char* Data::getPL() {
+// PL getter
+char* Device::getPL() {
 	return PL;
 }
 
-void Data::clear() {
+// sets all variables to null
+void Device::clear() {
 	dest = NULL;
 	memset(PL, 0, sizeof(PL));
 }

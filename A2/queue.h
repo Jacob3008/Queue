@@ -7,45 +7,82 @@ class Ring {
 public:
 	int enqueue(int,const char*);
 	int dequeue();
+	int head();
+	int tail();
+	int size();
+	int empty();
 	void display();
 private:
-	Data ring[6];
-	Data temp;
-	int head = 0;
-	int tail = 0;
+	Device ring[6];
+	Device temp;
+	int ptrHead = 0;
+	int ptrTail = 0;
 };
 
+// enqueues data from user input
 int Ring::enqueue(int dest, const char* PL) {
+	// checks to make sure destination is valid
 	if (strlen(PL) > 5) {
-		cout << "Error: Please enter a payload under 6 characters" << endl;
+		cout << endl << "Error: Please enter a payload under 6 characters" << endl;
 		return -1;
 	}
+	// checks to make sure payload is valid
 	if (dest < 0 || dest > 99) {
-		cout << "Error: Please enter a destination between 0 and 99" << endl;
+		cout << endl << "Error: Please enter a destination between 0 and 99" << endl;
 		return -1;
 	}
 
+	// sets temp object to user input
 	temp.setDest(dest);
 	temp.setPL(PL);
-	ring[tail] = temp;
-	tail++;
+
+	// set tail to temp object and clear temp
+	ring[ptrTail] = temp;
+	ptrTail++;
 	temp.clear();
 
 	return 0;
 }
 
+// dequeues data
 int Ring::dequeue() {
-	head++;
+	ptrHead++;
 	return 0;
 }
 
+// returns head index
+int Ring::head() {
+	return ptrHead;
+}
+
+// returns tail index
+int Ring::tail() {
+	return ptrTail;
+}
+
+// return ring size
+int Ring::size() {
+	return ptrTail - ptrHead;
+}
+
+// sets both head and tail to 0
+int Ring::empty() {
+	ptrHead = 0;
+	ptrTail = 0;
+
+	return 0;
+}
+
+// displays ring contents
 void Ring::display() {
-	for (int x = head; x < tail; x++)
+	// loop through head and tail indexes
+	for (int x = ptrHead; x < ptrTail; x++)
 	{
 		cout << "index " << x << ": Destination: " << ring[x].getDest() << ", Payload: " << ring[x].getPL() << endl;
 	}
 
+	// display current head and tail indexes
 	cout << endl;
-	cout << "head: " << head << endl;
-	cout << "tail: " << tail << endl;
+	cout << "head: " << ptrHead << endl;
+	cout << "tail: " << ptrTail << endl;
 }
