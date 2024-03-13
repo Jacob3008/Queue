@@ -3,15 +3,22 @@
 
 class Device {
 public:
+	Device();
 	void setDest(int);
 	int getDest();
 	void setPL(const char*);
 	char* getPL();
 	void clear();
+	bool isEmpty();
 private:
 	int dest;
 	char PL[6];
 };
+
+Device::Device() {
+	dest = NULL;
+	memset(PL, 0, sizeof(PL));
+}
 
 // dest setter
 void Device::setDest(int val) {
@@ -37,4 +44,14 @@ char* Device::getPL() {
 void Device::clear() {
 	dest = NULL;
 	memset(PL, 0, sizeof(PL));
+}
+
+// returns true if device is empty
+bool Device::isEmpty() {
+	if (dest == NULL && PL == memset(PL, 0, sizeof(PL))) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
